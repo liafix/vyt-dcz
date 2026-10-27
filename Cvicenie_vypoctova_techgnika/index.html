@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="Kompletný prehľad 18 cvičení z vývojových dosiek, Arduina, C/C++, simulácie a digitálnych vstupov a výstupov.">
+  <title>Programovanie mikrokontroléra | Výpočtová technika</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="vyt-2.css">
+  <script src="app.js" defer></script>
+  <script src="vyt-2.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="index.html" aria-label="Domov">
+      <span class="wordmark-icon">D·I/O</span>
+      <span>VÝPOČTOVÁ TECHNIKA <span class="wordmark-muted">/ 3. ROČNÍK</span></span>
+    </a>
+    <a class="header-link" href="#osnova">Osnova kurzu <span aria-hidden="true">↘</span></a>
+  </header>
+  <main>
+    <section class="teacher-notes shell homepage-teacher-notes" data-teacher-only>
+      <p class="eyebrow">UČITEĽSKÝ PREHĽAD · SKRYTÉ V POHĽADE ŽIAKA</p>
+      <h2>Metodická orientácia v učebnom celku</h2>
+      <div class="teacher-notes-grid">
+        <article><h3>Nadväznosť učiva</h3><p>Postupujte od orientácie v doske a IDE cez simuláciu, GPIO a podmienky k reprezentácii bitov, typom, EEPROM a ukazovateľom. Cvičenia 1.17 a 1.18 možno využiť ako samostatnú dvojhodinu.</p></article>
+        <article><h3>Práca s triedou</h3><p>Pri každom cvičení nech žiak najskôr vysloví predpoveď, následne upraví jednu vec a porovná výsledok s očakávaním. Stránka konkrétnej témy ponúka 45-minútový plán, dôkaz učenia aj rozširujúcu úlohu.</p></article>
+        <article><h3>Poznámka k testom</h3><p>Google Forms nie sú v tomto archíve automaticky konfigurované; dostupný je manuálny návod. Tabuľku s menami a známkami nezdieľajte so žiakmi; študentom posielajte iba odkaz na vyplnenie formulára.</p><a class="inline-resource" href="google-formular.html">Otvoriť návod pre Google Forms →</a></article>
+      </div>
+    </section>
+    <section class="course-hero shell">
+      <div class="course-hero-copy">
+        <p class="eyebrow"><span class="live-dot"></span> KOMPLETNÝ PRAKTICKÝ KURZ · 18 TÉM</p>
+        <h1>Od prvého<br><span>pinu po program.</span></h1>
+        <p class="hero-lead">Postupná cesta od zoznámenia s vývojovou doskou až po bity, pamäť a ukazovatele. Každá téma obsahuje krátky teoretický základ, ciele, praktické zadanie a kontrolu porozumenia.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#osnova">Otvoriť osnovu <span aria-hidden="true">↓</span></a>
+          <a class="button button-quiet" href="cvicenie-1.html">Začať digitálnymi vstupmi <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-meta"><span>◉ Arduino Uno</span><span>⌘ C / C++</span><span>▤ 18 tém</span><span>↗ Odkazy na Arduino</span></div>
+      </div>
+<figure class="vyt-hero-visual" aria-label="Ilustračná interaktívna grafika spracovania digitálneho signálu">
+  <div class="vyt-hero-stage">
+    <span class="vyt-stage-top"><span class="vyt-stage-beacon"></span> SIGNAL / ENGINEERING / LAB <em>REV 2.0</em></span>
+    <img src="assets/hero-signal.svg" alt="Ilustračný elektronický modul s digitálnym vstupom D2, výstupom D8 a LED signalizáciou" width="720" height="520" fetchpriority="high">
+    <div class="vyt-stage-bottom"><span>INPUT <b>→</b> PROCESS <b>→</b> OUTPUT</span><span>01 — 18 / CORE</span></div>
+  </div>
+  <figcaption>TECHNICAL VISUAL STUDY · Schéma je ilustrácia, nie návod na fyzické zapojenie.</figcaption>
+</figure>
+    </section>
+
+    <section class="shell vyt-lecture-feature" aria-label="Rýchly štart prednášky">
+  <div><span class="vyt-feature-index">01 / LIVE SESSION</span><h2>Od teórie k signálu.<br><span>Vyskúšaj to naživo.</span></h2><p>Dva režimy vstupu, jeden experiment s LED a časový priebeh, ktorý reaguje na stlačenie tlačidla.</p></div>
+  <a class="vyt-feature-action" href="cvicenie-2.html#laboratorium">SPUSTIŤ INTERAKTÍVNE LABORATÓRIUM <span aria-hidden="true">↗</span></a>
+</section>
+<section class="shell course-intro">
+      <div><p class="eyebrow">MAPA UČIVA</p><h2>Najprv hardvér.<br>Potom logika.</h2></div>
+      <p>Označenie <code>1 / 1</code> pri téme znamená jeden plánovaný výstup cvičenia v tejto online osnove; číslo pri 1.1 zachováva pôvodný údaj zo zadania. Učivo je rozdelené do piatich nadväzujúcich celkov. Témy 1.17 a 1.18 majú pripravené samostatné 45-minútové hodiny.</p>
+    </section>
+
+    <section class="shell curriculum-section" id="osnova">
+      <div class="section-heading"><div><p class="eyebrow">1 · VÝVOJOVÉ PROSTREDIA, SIMULÁCIA A PROGRAMOVANIE</p><h2>Celá štruktúra cvičení</h2></div><p class="section-note">Vyber tému a otvor jej materiál. Postup, zadania a výsledky sú prispôsobené práci s Arduinom Uno; pri simulácii možno použiť školou zvolený simulátor.</p></div>
+      <div class="course-stats"><span><strong>18</strong> tém</span><span><strong>5</strong> učebných celkov</span><span><strong>2</strong> podrobné 45-minútové prípravy</span><span><strong>5</strong> domácich projektov</span></div>
+
+      <section class="unit-block">
+        <div class="unit-heading"><span class="unit-number">01</span><div><p class="eyebrow">ZAČÍNAME S DOSKOU A IDE</p><h3>Vývojové prostredie, simulácia a prvý program</h3></div><span class="unit-range">1.1 — 1.4</span></div>
+        <div class="topic-grid">
+          <a class="topic-card" href="lekcia.html?tema=1-1"><span class="topic-number">1.1</span><span class="topic-title">Zoznámenie s vývojovou doskou a pracovným prostredím</span><span class="topic-info">Doska, piny, bezpečnosť · údaj zo zadania: 4</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-2"><span class="topic-number">1.2</span><span class="topic-title">Zoznámenie s IDE – vytvorenie projektu</span><span class="topic-info">Nový sketch, uloženie, kontrola a nahratie</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-3"><span class="topic-number">1.3</span><span class="topic-title">Simulácia činnosti MCU v PC</span><span class="topic-info">Virtuálny obvod, simulácia, pozorovanie</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-4"><span class="topic-number">1.4</span><span class="topic-title">Prvý program – LED, GPIO</span><span class="topic-info">setup(), loop(), pinMode(), LED</span><span class="topic-arrow">↗</span></a>
+        </div>
+      </section>
+
+      <section class="unit-block">
+        <div class="unit-heading"><span class="unit-number">02</span><div><p class="eyebrow">VSTUP → ROZHODNUTIE → VÝSTUP</p><h3>Práca s GPIO a stavovou logikou</h3></div><span class="unit-range">1.5 — 1.9</span></div>
+        <div class="topic-grid">
+          <a class="topic-card" href="lekcia.html?tema=1-5"><span class="topic-number">1.5</span><span class="topic-title">Práca s GPIO – vstup a výstup</span><span class="topic-info">INPUT, OUTPUT, digitalRead(), digitalWrite()</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-6"><span class="topic-number">1.6</span><span class="topic-title">Jednoduché riadenie LED</span><span class="topic-info">Časovanie, vzory a neblokujúce millis()</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-7"><span class="topic-number">1.7</span><span class="topic-title">Čítanie tlačidla</span><span class="topic-info">Čítanie vstupu, stabilný a nestabilný stav</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-8"><span class="topic-number">1.8</span><span class="topic-title">Tlačidlo a LED – logické podmienky</span><span class="topic-info">if / else, porovnávanie a logické operátory</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-9"><span class="topic-number">1.9</span><span class="topic-title">Jednoduchá stavová logika</span><span class="topic-info">Stavy, prechody a diagram stavov</span><span class="topic-arrow">↗</span></a>
+        </div>
+      </section>
+
+      <section class="unit-block">
+        <div class="unit-heading"><span class="unit-number">03</span><div><p class="eyebrow">ČÍSELNÉ SÚSTAVY A PRÁCA S BITMI</p><h3>Binárne hodnoty, typy a masky</h3></div><span class="unit-range">1.10 — 1.13</span></div>
+        <div class="topic-grid">
+          <a class="topic-card" href="lekcia.html?tema=1-10"><span class="topic-number">1.10</span><span class="topic-title">Práca s binárnymi hodnotami</span><span class="topic-info">Prevod dvojkovej a desiatkovej sústavy</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-11"><span class="topic-number">1.11</span><span class="topic-title">Hexadecimálne hodnoty v programe</span><span class="topic-info">Nibbly, bajty, zápis 0x a farby RGB</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-12"><span class="topic-number">1.12</span><span class="topic-title">Dátové typy v C/C++</span><span class="topic-info">Rozsahy typov, konverzie a pretečenie</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-13"><span class="topic-number">1.13</span><span class="topic-title">Nastavenie a testovanie jednotlivých bitov</span><span class="topic-info">AND, OR, XOR, posun a maska</span><span class="topic-arrow">↗</span></a>
+        </div>
+      </section>
+
+      <section class="unit-block">
+        <div class="unit-heading"><span class="unit-number">04</span><div><p class="eyebrow">PAMÄŤ, ADRESY A POKRAČOVANIE</p><h3>Ukladanie údajov a ukazovatele</h3></div><span class="unit-range">1.14 — 1.16</span></div>
+        <div class="topic-grid">
+          <a class="topic-card" href="lekcia.html?tema=1-14"><span class="topic-number">1.14</span><span class="topic-title">Ukladanie a čítanie údajov</span><span class="topic-info">Premenné, EEPROM a uchovanie nastavenia</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-15"><span class="topic-number">1.15</span><span class="topic-title">Práca s adresami a ukazovateľmi</span><span class="topic-info">Adresa premennej, &amp;, *, typovaný ukazovateľ</span><span class="topic-arrow">↗</span></a>
+          <a class="topic-card" href="lekcia.html?tema=1-16"><span class="topic-number">1.16</span><span class="topic-title">Jednoduchá práca s ukazovateľmi</span><span class="topic-info">Bezpečné čítanie, zápis a prechod po poli</span><span class="topic-arrow">↗</span></a>
+        </div>
+      </section>
+
+      <section class="unit-block unit-highlight">
+        <div class="unit-heading"><span class="unit-number">05</span><div><p class="eyebrow">DVE SAMOSTATNÉ HODINY · SPOLU 90 MIN</p><h3>Digitálne stavy a ich spracovanie</h3></div><span class="unit-range">1.17 — 1.18</span></div>
+        <div class="lesson-grid">
+          <article class="lesson-card lesson-card-one"><div class="card-top"><span class="card-number">1.17</span><span class="duration">45 MIN</span></div><p class="card-kicker">DIGITÁLNE VSTUPY A VÝSTUPY</p><h3>Vstup dá pokyn.<br>Výstup ho vykoná.</h3><p>Teória, bezpečné zapojenie, päť školských projektov, krátky kvíz a kritériá úspechu.</p><a class="card-link" href="cvicenie-1.html">Otvoriť 1. vyučovaciu hodinu <span aria-hidden="true">↗</span></a></article>
+          <article class="lesson-card lesson-card-two"><div class="card-top"><span class="card-number">1.18</span><span class="duration">45 MIN</span></div><p class="card-kicker">PULL-UP / PULL-DOWN</p><h3>Vstup, ktorý<br>nepláva.</h3><p>Plávajúci vstup, porovnanie rezistorových zapojení, interaktívny model a päť projektových kariet.</p><a class="card-link" href="cvicenie-2.html">Otvoriť 2. vyučovaciu hodinu <span aria-hidden="true">↗</span></a></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="shell resource-section">
+      <div class="resource-intro"><p class="eyebrow">PRIMÁRNE ZDROJE · ARDUINO</p><h2>Dokumentácia<br>od výrobcu dosky.</h2><p>Materiály sú vysvetlené vlastnými slovami. Odkazy vedú na oficiálnu dokumentáciu Arduino a výrobcom zverejnené technické informácie.</p></div>
+      <div class="resource-links">
+        <a href="https://docs.arduino.cc/learn/starting-guide/getting-started-arduino/" target="_blank" rel="noopener noreferrer"><span>01 / ZAČIATKY</span><strong>Getting started with Arduino ↗</strong></a>
+        <a href="https://docs.arduino.cc/software/ide-v2/" target="_blank" rel="noopener noreferrer"><span>02 / PROSTREDIE</span><strong>Arduino IDE 2 ↗</strong></a>
+        <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener noreferrer"><span>03 / JAZYK</span><strong>Arduino Language Reference ↗</strong></a>
+        <a href="https://docs.arduino.cc/built-in-examples/" target="_blank" rel="noopener noreferrer"><span>04 / UKÁŽKY</span><strong>Built-in Examples ↗</strong></a>
+        <a href="https://store.arduino.cc/products/arduino-uno-rev3" target="_blank" rel="noopener noreferrer"><span>05 / DOSKA</span><strong>Arduino Uno Rev3 · špecifikácie ↗</strong></a>
+      </div>
+    </section>
+    <section class="shell homework-callout"><div><p class="eyebrow">ZÁVEREČNÉ PRECVIČENIE</p><h2>Vyber si domácu projektovú výzvu.</h2><p>Päť zadaní so stupňujúcou sa náročnosťou, jednotnými kritériami hodnotenia a alternatívou bez fyzickej dosky.</p></div><a class="button button-primary" href="domace-ulohy.html">Otvoriť domáce úlohy <span aria-hidden="true">→</span></a></section>
+    <section class="shell homework-callout quiz-callout"><div><p class="eyebrow">UČITEĽSKÝ NÁSTROJ · GOOGLE FORMS</p><h2>Google Forms: manuálne nastavenie.</h2><p>Automatické vytváranie Google Forms nie je súčasťou tohto balíka. Návod vysvetľuje obmedzenie a bezpečný manuálny postup.</p></div><a class="button button-quiet" href="google-formular.html">Nastaviť testy <span aria-hidden="true">→</span></a></section>
+  </main>
+  <footer class="site-footer shell"><span>VÝPOČTOVÁ TECHNIKA · 3. ROČNÍK</span><span>Arduino Uno · digitálne systémy · C/C++</span><a href="#osnova">Späť na osnovu ↑</a></footer>
+</body>
+</html>

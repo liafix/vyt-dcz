@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="Päť domácich Arduino Uno zadaní na digitálne vstupy a výstupy, LED, tlačidlá a pull-up rezistor.">
+  <title>Domáce úlohy | Výpočtová technika</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="vyt-2.css">
+  <script src="app.js" defer></script>
+  <script src="vyt-2.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="index.html"><span class="wordmark-icon">D·I/O</span><span>VÝPOČTOVÁ TECHNIKA <span class="wordmark-muted">/ 3. ROČNÍK</span></span></a><a class="header-link" href="cvicenie-2.html">← Späť na 2. cvičenie</a></header>
+  <main>
+    <section class="lesson-hero homework-hero shell">
+      <div><p class="eyebrow"><span class="live-dot"></span> SAMOSTATNÁ PRÁCA · ARDUINO UNO</p><h1>Domáca<br><span>výzva.</span></h1><p class="hero-lead">Päť malých projektov na jednu tému: školská svetelná signalizácia. Vyber si zadanie, navrhni logiku a zdokumentuj výsledok.</p><div class="hero-actions"><a class="button button-primary" href="#zadania">Zobraziť zadania <span aria-hidden="true">↓</span></a><button class="button button-quiet print-button" type="button" data-print>Vytlačiť zadania</button></div></div>
+      <aside class="outcome-card"><span class="outcome-icon">05</span><p class="eyebrow">POŽIADAVKY NA ODOVZDANIE</p><h2>Kód aj vysvetlenie.</h2><p>Ku každému projektu odovzdaj zapojenie, komentovaný program a stručný testovací scenár.</p><div class="success-line"><span class="live-dot"></span> ZDÔVODNI, ČO JE INPUT A ČO OUTPUT</div></aside>
+    </section>
+
+    <section class="shell lesson-section" id="zadania">
+      <div class="section-heading"><div><p class="eyebrow">PÄŤ SAMOSTATNÝCH ZADANÍ</p><h2>Vyber si svoju výzvu</h2></div><p class="section-note">Všetky projekty používajú Arduino Uno a učivo z oboch hodín. LED vždy pripájaj cez prúdový rezistor. Tlačidlá s INPUT_PULLUP pripájaj medzi vstup a GND.</p></div>
+      <div class="project-grid homework-grid">
+        <article class="project-card"><span class="project-number">DOMÁCA ÚLOHA 01 · ZÁKLAD</span><h3>Tichý signál v triede</h3><p>Jedno tlačidlo ovláda jednu LED. LED svieti iba počas stlačenia tlačidla.</p><div class="task-line"><strong>Požiadavky</strong><span>Použi D2 ako INPUT_PULLUP a D8 ako OUTPUT. Vyhodnoť stlačenie ako LOW.</span></div><div class="check-line"><strong>Odovzdaj</strong><span>Schému, program s komentárom a tabuľku: uvoľnené/stlačené → HIGH/LOW → LED.</span></div><span class="homework-level">ZÁKLAD</span></article>
+        <article class="project-card"><span class="project-number">DOMÁCA ÚLOHA 02 · STAV</span><h3>Potvrdenie odpovede</h3><p>Krátke stlačenie prepne LED; LED zostane v novom stave aj po uvoľnení. Ďalšie stlačenie stav zmení späť.</p><div class="task-line"><strong>Požiadavky</strong><span>Ulož stav do premennej. Vysvetli, prečo jednoduchý if bez ošetrenia môže zaregistrovať viac zmien pri jednom stlačení.</span></div><div class="check-line"><strong>Odovzdaj</strong><span>Kód, diagram stavov LED a návrh, ako predísť opakovanému prepnutiu (napr. debounce alebo detekcia hrany).</span></div><span class="homework-level">STREDNÁ</span></article>
+        <article class="project-card"><span class="project-number">DOMÁCA ÚLOHA 03 · DVA VSTUPY</span><h3>Semafor otázok</h3><p>Dve tlačidlá: „potrebujem pomoc“ rozsvieti červenú LED, „rozumiem“ zelenú LED.</p><div class="task-line"><strong>Požiadavky</strong><span>Použi D2 a D3 ako INPUT_PULLUP; D8 a D9 ako výstupy. Každé tlačidlo testuj samostatne.</span></div><div class="check-line"><strong>Odovzdaj</strong><span>Tabuľku testov pre A, B, obe tlačidlá naraz a žiadne stlačené.</span></div><span class="homework-level">STREDNÁ</span></article>
+        <article class="project-card"><span class="project-number">DOMÁCA ÚLOHA 04 · LOGIKA</span><h3>Dve odpovede na otázku</h3><p>Zelená znamená „A“, červená „B“. Pridaj stav, keď sú stlačené obe tlačidlá naraz.</p><div class="task-line"><strong>Požiadavky</strong><span>Navrhni pravdivostnú tabuľku a zdôvodni poradie podmienok v programe.</span></div><div class="check-line"><strong>Odovzdaj</strong><span>Pravdivostnú tabuľku štyroch kombinácií a program, ktorý zodpovedá každej kombinácii.</span></div><span class="homework-level">VÝZVA</span></article>
+        <article class="project-card"><span class="project-number">DOMÁCA ÚLOHA 05 · POROVNANIE</span><h3>Ktoré zapojenie si vyberieš?</h3><p>Vytvor dva varianty rovnakého ovládania: externý pull-down a interný pull-up.</p><div class="task-line"><strong>Požiadavky</strong><span>Pre oba varianty popíš zapojenie, pinMode() a stavy pri uvoľnenom/stlačenom tlačidle.</span></div><div class="check-line"><strong>Odovzdaj</strong><span>Porovnávaciu tabuľku, dva nákresy zapojenia a 3–5 viet so zdôvodnením výberu.</span></div><span class="homework-level">VÝZVA</span></article>
+        <article class="project-card teacher-card"><span class="project-number">SPOLOČNÉ PODMIENKY</span><h3>Bezpečne a čitateľne</h3><p>Zapojovanie rob bez napájania. Každá LED musí mať prúdový rezistor; zabráň skratu medzi +5 V a GND. Over, že doska podporuje použité napäťové úrovne.</p><div class="task-line"><strong>Odovzdanie</strong><span>Fotografia alebo schéma zapojenia, program a krátky popis testov. Ak nemáš dosku doma, odovzdaj simuláciu alebo podrobný papierový návrh.</span></div></article>
+      </div>
+    </section>
+
+    <section class="shell assessment-section homework-assessment"><div><p class="eyebrow">JEDNOTNÉ HODNOTENIE · 10 BODOV</p><h2>Čo sa hodnotí?</h2></div><ul class="assessment-list"><li><span>4 b</span> funkčný program a správna konfigurácia digitálnych pinov,</li><li><span>2 b</span> korektné zapojenie a bezpečná práca s LED a tlačidlami,</li><li><span>2 b</span> vysvetlenie HIGH/LOW vrátane logiky INPUT_PULLUP,</li><li><span>2 b</span> preukázateľné testy a zrozumiteľná dokumentácia.</li></ul></section>
+    <nav class="lesson-nav shell" aria-label="Navigácia cvičení"><a href="index.html">← Prehľad</a><a class="next-link" href="cvicenie-1.html">Zopakovať 1. cvičenie →</a></nav>
+  </main>
+  <footer class="site-footer shell"><span>VÝPOČTOVÁ TECHNIKA · 3. ROČNÍK</span><span>Samostatná práca · 5 projektov</span><a href="index.html">Prehľad <span aria-hidden="true">→</span></a></footer>
+</body>
+</html>

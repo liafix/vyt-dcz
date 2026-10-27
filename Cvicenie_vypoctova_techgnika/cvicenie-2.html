@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="45-minútové praktické cvičenie o pull-up a pull-down rezistoroch a stabilných digitálnych vstupoch.">
+  <title>02 — Vstup, ktorý nepláva | Výpočtová technika</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="vyt-2.css">
+  <script src="app.js" defer></script>
+  <script src="vyt-2.js" defer></script>
+</head>
+<body>
+  <header class="site-header"><a class="wordmark" href="index.html"><span class="wordmark-icon">D·I/O</span><span>VÝPOČTOVÁ TECHNIKA <span class="wordmark-muted">/ 3. ROČNÍK</span></span></a><a class="header-link" href="index.html">← Prehľad cvičení</a></header>
+  <main>
+    <section class="lesson-hero shell">
+      <div><p class="eyebrow"><span class="live-dot"></span> CVIČENIE 02 · 45 MIN · ARDUINO UNO</p><h1>Vstup, ktorý<br><span>nepláva.</span></h1><p class="hero-lead">Prečo tlačidlo niekedy „stlačí“ aj bez dotyku? Udrž vstup v definovanom stave a porovnaj externý pull-down s interným pull-up.</p><div class="hero-actions"><a class="button button-primary" href="#priebeh">Prejsť na priebeh <span aria-hidden="true">↓</span></a><button class="button button-quiet print-button" type="button" data-print>Vytlačiť prípravu</button></div></div>
+      <aside class="outcome-card outcome-card-purple"><span class="outcome-icon">02</span><p class="eyebrow">CIEĽ HODINY</p><h2>Vstup má istý stav.</h2><p>Vysvetlím plávajúci vstup, porovnám pull-up a pull-down a správne použijem INPUT_PULLUP.</p><div class="success-line"><span class="live-dot"></span> KĽÚČ: INPUT_PULLUP → STLAČENÉ = LOW</div></aside>
+    </section>
+
+    <section class="shell lesson-section" id="priebeh">
+      <div class="section-heading"><div><p class="eyebrow">ČASOVÝ PLÁN</p><h2>45 minút v dielni</h2></div><span class="duration duration-large">POMÔCKY: UNO · LED · TLAČIDLO · PREPOJKY · REZISTOR 10 kΩ</span></div>
+      <div class="timeline">
+        <article class="timeline-row"><span class="time">00–05<small>5 min</small></span><div><span class="phase">NÁVRAT K PREDCHÁDZAJÚCEJ HODINE</span><h3>Čo znamená HIGH na vstupe?</h3><p>Pripomeňte si, ako tlačidlo odovzdá programu stav a ako program nastaví výstup LED.</p></div><span class="teacher-cue">PRIPOMEŇ</span></article>
+        <article class="timeline-row"><span class="time">05–12<small>7 min</small></span><div><span class="phase">PROBLÉM</span><h3>Čo sa stane s nepripojeným vstupom?</h3><p>Predpoveď: stabilná nula, stabilná jednotka alebo nepredvídateľné čítanie? Vysvetlite, že vstup bez pevného spojenia zachytáva rušenie.</p></div><span class="teacher-cue">PREDPOVEĎ → DÔVOD</span></article>
+        <article class="timeline-row"><span class="time">12–20<small>8 min</small></span><div><span class="phase">VYSVETLENIE A UKÁŽKA</span><h3>Pull-down verzus pull-up</h3><p>Nakreslite obe zapojenia. Pri pull-down je pokojový stav LOW; pri pull-up HIGH. Tlačidlo pri stlačení pripojí vstup na opačnú úroveň.</p></div><span class="teacher-cue">POROVNAJ</span></article>
+        <article class="timeline-row"><span class="time">20–35<small>15 min</small></span><div><span class="phase">LABORATÓRNE CVIČENIE</span><h3>Prepoj obvod na INPUT_PULLUP</h3><p>Odpoj USB, prerob tlačidlo, nahraj kód a over uvoľnený aj stlačený stav. Zaznamenaj čítanie tlačidla.</p></div><span class="teacher-cue">ODPOJ → PREPOJ → TESTUJ</span></article>
+        <article class="timeline-row"><span class="time">35–42<small>7 min</small></span><div><span class="phase">PROJEKTOVÁ VÝZVA</span><h3>Uprav signalizáciu a otestuj rohy</h3><p>Použi pull-up zapojenie v jednej projektovej karte. Otestuj stlačené, uvoľnené a pri dvoch tlačidlách aj súčasne stlačené.</p></div><span class="teacher-cue">UPRAV → OVER</span></article>
+        <article class="timeline-row"><span class="time">42–45<small>3 min</small></span><div><span class="phase">EXIT TICKET</span><h3>Vysvetli obrátenú logiku</h3><p>„Pri INPUT_PULLUP je tlačidlo stlačené = LOW, pretože …“</p></div><span class="teacher-cue">VYSVETLI</span></article>
+      </div>
+    </section>
+
+<section class="shell lesson-section vyt-lab-section" id="laboratorium" data-vyt-lab data-vyt-default-mode="pullup">
+  <div class="vyt-lab-heading">
+    <div><p class="eyebrow"><span class="live-dot"></span> LIVE LAB / DIGITÁLNA ELEKTRONIKA</p><h2>Stlač tlačidlo.<br><span>Pozoruj signál.</span></h2><p>Interaktívny výučbový model pre Arduino Uno (5 V). Ovládač nastavuje logiku, výstup D8 a zaznamenáva zmeny signálu.</p></div>
+    <div class="vyt-lab-live"><span class="vyt-lab-dot"></span> INTERACTIVE / OFFLINE READY</div>
+  </div>
+  <div class="vyt-lab-shell">
+    <div class="vyt-lab-toolbar">
+      <div class="vyt-mode-options" role="group" aria-label="Vyber typ zapojenia">
+        <button type="button" class="vyt-mode" data-vyt-mode="pullup" aria-pressed="true">INTERNÝ PULL-UP</button>
+        <button type="button" class="vyt-mode" data-vyt-mode="pulldown" aria-pressed="false">EXTERNÝ PULL-DOWN</button>
+      </div>
+      <span class="vyt-lab-board">ARDUINO UNO · D2 / D8 · 5 V</span>
+    </div>
+    <div class="vyt-lab-grid">
+      <div class="vyt-lab-visual">
+        <div class="vyt-visual-header"><span>01 / SCHÉMA ZAPOJENIA</span><span data-vyt-circuit-label>INTERNAL PULL-UP</span></div>
+        <svg viewBox="0 0 700 335" role="img" aria-labelledby="vyt-schema-title vyt-schema-desc" class="vyt-circuit-svg">
+          <title id="vyt-schema-title">Zjednodušená schéma Arduino Uno, tlačidla a LED</title>
+          <desc id="vyt-schema-desc">Pri pull-up je tlačidlo medzi D2 a GND; interný rezistor drží HIGH. Pri pull-down je D2 cez rezistor 10 kΩ na GND a tlačidlo na 5 V. LED na D8 je zapojená cez obmedzovací rezistor 330 Ω na GND.</desc>
+          <defs><pattern id="vyt-dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#94a3b8" opacity=".22"/></pattern></defs>
+          <rect width="700" height="335" rx="18" fill="url(#vyt-dots)"/>
+          <rect x="33" y="45" width="226" height="245" rx="15" fill="#172943" stroke="#6084a0" stroke-width="1.5"/>
+          <rect x="50" y="64" width="192" height="26" rx="5" fill="#0c1828"/>
+          <text x="62" y="82" fill="#a9f16c" font-size="12" font-family="monospace">ARDUINO / UNO</text>
+          <rect x="97" y="114" width="105" height="81" rx="6" fill="#081521" stroke="#4b6176"/>
+          <text x="149" y="149" text-anchor="middle" fill="#c7d4e6" font-size="12" font-family="monospace">ATmega</text><text x="149" y="166" text-anchor="middle" fill="#8699b2" font-size="11" font-family="monospace">328P</text>
+          <text x="214" y="129" text-anchor="end" fill="#a9f16c" font-size="12" font-family="monospace">D2</text>
+          <text x="214" y="233" text-anchor="end" fill="#76b9ff" font-size="12" font-family="monospace">D8</text>
+          <circle cx="259" cy="124" r="5" fill="#a9f16c"/><circle cx="259" cy="228" r="5" fill="#76b9ff"/>
+          <path d="M259 124 H398" stroke="#a9f16c" stroke-width="3" fill="none" class="vyt-circuit-input"/>
+          <g data-vyt-svg="pullup">
+            <path d="M398 124 H447 M492 124 H572 V270" stroke="#a9f16c" stroke-width="3" fill="none"/>
+            <circle cx="447" cy="124" r="5" fill="#d7e6f5"/><circle cx="492" cy="124" r="5" fill="#d7e6f5"/>
+            <path d="M447 124 L485 104" stroke="#d7e6f5" stroke-width="3" data-vyt-switch/>
+            <text x="486" y="92" text-anchor="middle" fill="#d0dded" font-size="12" font-family="monospace">BUTTON</text>
+            <path d="M560 270 H584 M564 277 H580 M569 284 H575" stroke="#b8c7d7" stroke-width="2"/>
+            <text x="598" y="275" fill="#b8c7d7" font-size="12" font-family="monospace">GND</text>
+            <rect x="48" y="255" width="186" height="32" rx="5" fill="#213950" stroke="#47607b"/>
+            <text x="141" y="275" text-anchor="middle" fill="#a9f16c" font-size="11" font-family="monospace">5 V → PULL-UP → D2</text>
+          </g>
+          <g data-vyt-svg="pulldown" style="display:none">
+            <path d="M398 124 H447 M492 124 H573 V62" stroke="#a9f16c" stroke-width="3" fill="none"/>
+            <circle cx="447" cy="124" r="5" fill="#d7e6f5"/><circle cx="492" cy="124" r="5" fill="#d7e6f5"/>
+            <path d="M447 124 L485 104" stroke="#d7e6f5" stroke-width="3" data-vyt-switch/>
+            <text x="482" y="92" text-anchor="middle" fill="#d0dded" font-size="12" font-family="monospace">BUTTON</text>
+            <text x="575" y="52" text-anchor="middle" fill="#a9f16c" font-size="13" font-family="monospace">+5 V</text>
+            <path d="M398 124 V159 L393 168 L403 176 L393 184 L403 192 L398 200 V265" stroke="#c5a2ff" stroke-width="2.5" fill="none"/>
+            <text x="410" y="189" fill="#c5a2ff" font-size="12" font-family="monospace">10 kΩ</text>
+            <path d="M386 265 H410 M390 272 H406 M395 279 H401" stroke="#b8c7d7" stroke-width="2"/>
+            <text x="420" y="272" fill="#b8c7d7" font-size="12" font-family="monospace">GND</text>
+          </g>
+          <path d="M259 228 H295 L305 219 L315 237 L325 219 L335 237 L345 219 L355 228 H415" stroke="#76b9ff" stroke-width="2.8" fill="none"/>
+          <text x="327" y="209" text-anchor="middle" fill="#b9d1ee" font-family="monospace" font-size="11">330 Ω</text>
+          <path d="M415 210 V246 M436 210 V246 M415 228 H405 M436 228 H485 V287" stroke="#76b9ff" stroke-width="2.7" fill="none"/>
+          <path d="M415 210 L436 228 L415 246 Z" fill="#76b9ff" opacity=".5"/>
+          <circle cx="425" cy="228" r="28" fill="#a9f16c" opacity=".07" data-vyt-led-glow/>
+          <path d="M473 287 H497 M478 294 H492 M483 301 H487" stroke="#b8c7d7" stroke-width="2"/>
+          <text x="509" y="293" fill="#b8c7d7" font-size="12" font-family="monospace">GND</text>
+          <text x="429" y="193" text-anchor="middle" fill="#d9e9f5" font-size="11" font-family="monospace">LED</text>
+        </svg>
+        <p class="vyt-visual-caption">Schematický výučbový model · LED D8 → 330 Ω → LED → GND · pred fyzickým zapojením vždy over pinout.</p>
+      </div>
+      <div class="vyt-lab-dashboard">
+        <div class="vyt-visual-header"><span>02 / LIVE TELEMETRY</span><span data-vyt-event>ČAKÁM NA VSTUP</span></div>
+        <div class="vyt-state-box"><div><span>digitalRead(D2)</span><strong data-vyt-state>HIGH</strong></div><div><span>digitalWrite(D8)</span><strong data-vyt-output>LOW</strong></div></div>
+        <div class="vyt-indicator-row"><div class="vyt-led-indicator" data-vyt-led aria-hidden="true"></div><div><b data-vyt-led-label>LED / VYPNUTÁ</b><small data-vyt-explanation>Tlačidlo je uvoľnené. Vstup drží interný pull-up.</small></div></div>
+        <button class="vyt-press" type="button" data-vyt-press aria-pressed="false">● &nbsp; STLAČIŤ TLAČIDLO <span>↵</span></button>
+        <div class="vyt-lab-hint">Kliknutím prepni tlačidlo · funguje aj kláves Enter/Space.</div>
+      </div>
+    </div>
+    <div class="vyt-wave-panel"><div class="vyt-visual-header"><span>03 / TIMING ANALYZER</span><button type="button" class="vyt-reset" data-vyt-reset>↺ Vymazať záznam</button></div>
+      <div class="vyt-wave-body"><div class="vyt-wave-caption"><span>INPUT D2</span><strong data-vyt-wave-label>HIGH</strong></div><svg viewBox="0 0 660 128" class="vyt-wave-svg" role="img" aria-label="Časový priebeh logickej úrovne na pine D2"><path d="M0 32 H660 M0 95 H660" stroke="#63748b" stroke-opacity=".25" stroke-dasharray="5 8"/><text x="6" y="22" fill="#8c9eb6" font-size="10" font-family="monospace">HIGH</text><text x="6" y="113" fill="#8c9eb6" font-size="10" font-family="monospace">LOW</text><path data-vyt-wave d="M45 32 H650" fill="none" stroke="#a9f16c" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    </div>
+    <p class="vyt-wave-disclaimer">Posledných 12 zmien vstupu – os udalostí, nie meraný čas v milisekundách.</p>
+    <div class="vyt-code-guide"><div><p class="phase">04 / KÓD A VYSVETLENIE</p><h3>Prečo LED svieti?</h3><p data-vyt-why>V režime INPUT_PULLUP je stlačenie tlačidla logická nula. LED sa rozsvieti pri LOW.</p><div class="vyt-code-actions"><button type="button" data-vyt-step>Ďalší krok kódu →</button><span data-vyt-step-label>0 / 4</span></div></div><pre class="vyt-live-code"><code data-vyt-code aria-label="Ukážkový Arduino kód"></code></pre></div>
+  </div>
+</section>
+
+    <section class="theory-band">
+      <div class="shell theory-layout">
+        <div class="theory-intro"><p class="eyebrow">TEORETICKÝ ZÁKLAD</p><h2>Žiadny pin<br>nesmie hádať.</h2><p>Nepripojený digitálny vstup nemá zaručený stav. Rezistor ho jemne pritiahne k definovanej úrovni.</p></div>
+        <div class="theory-list">
+          <article class="theory-item"><span class="theory-index">01</span><div><h3>Plávajúci vstup (floating input)</h3><p>Vstup nie je pevne pripojený na HIGH ani LOW. Zachytáva rušenie a jeho čítanie môže náhodne kolísať.</p></div></article>
+          <article class="theory-item"><span class="theory-index">02</span><div><h3>Pull-down drží LOW</h3><p>Rezistor spája vstup s GND; tlačidlo ho po stlačení pripojí na +5 V. Uvoľnené = LOW, stlačené = HIGH.</p></div></article>
+          <article class="theory-item"><span class="theory-index">03</span><div><h3>Pull-up drží HIGH</h3><p>Rezistor spája vstup s napájacou úrovňou; tlačidlo ho po stlačení pripojí na GND. Uvoľnené = HIGH, stlačené = LOW.</p></div></article>
+          <article class="theory-item"><span class="theory-index">04</span><div><h3>Arduino Uno má interný pull-up</h3><p><code>pinMode(BUTTON_PIN, INPUT_PULLUP);</code> aktivuje interný rezistor. Externý pull-up netreba; program musí počítať s obrátenou logikou.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">POROVNANIE ZAPOJENÍ</p><h2>Rovnaké tlačidlo, opačný pokojový stav</h2></div><p class="section-note">Vstup je na D2 v oboch prípadoch. Mení sa rezistorová cesta aj logika, ktorú treba testovať v programe.</p></div>
+      <div class="compare-grid">
+        <article class="panel"><span class="phase">EXTERNÝ PULL-DOWN</span><h3>Uvoľnené = LOW</h3><div class="state-pair"><span>UVOĽNENÉ <b>LOW / 0</b></span><span>STLAČENÉ <b>HIGH / 1</b></span></div><div class="wiring-lines"><p><span>D2</span> ↔ tlačidlo ↔ +5 V</p><p><span>D2</span> ↔ rezistor 10 kΩ ↔ GND</p></div><p class="fine-print">PinMode: INPUT. Tlačidlo po stlačení pripojí vstup na +5 V.</p></article>
+        <article class="panel pullup-panel"><span class="phase">INTERNÝ PULL-UP · ARDUINO UNO</span><h3>Uvoľnené = HIGH</h3><div class="state-pair"><span>UVOĽNENÉ <b>HIGH / 1</b></span><span>STLAČENÉ <b>LOW / 0</b></span></div><div class="wiring-lines"><p><span>D2</span> ↔ tlačidlo ↔ GND</p><p><span>vstavaný rezistor</span> ↗ vytvorí HIGH</p></div><p class="fine-print">PinMode: INPUT_PULLUP. V externom obvode netreba pridávať pull-up rezistor.</p></article>
+      </div>
+      <p class="vyt-note">Interaktívny model oboch zapojení sa nachádza v novom laboratóriu vyššie. Vzorový program nižšie ostáva zapojením s interným pull-up rezistorom.</p>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">VZOROVÝ PROGRAM</p><h2>INPUT_PULLUP bez externého rezistora</h2></div><p class="section-note">Pripoj tlačidlo medzi D2 a GND. Interný pull-up zabezpečí pokojový HIGH stav.</p></div>
+      <article class="panel code-panel"><div class="code-heading"><span>ARDUINO IDE · LED SVETI PRI STLAČENÍ</span><button class="copy-button" type="button" data-copy="code-two">Kopírovať</button></div><pre><code id="code-two">const int LED_PIN = 8;
+const int BUTTON_PIN = 2;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+}
+
+void loop() {
+  int buttonState = digitalRead(BUTTON_PIN);
+
+  if (buttonState == LOW) {
+    digitalWrite(LED_PIN, HIGH);
+  } else {
+    digitalWrite(LED_PIN, LOW);
+  }
+}</code></pre><p class="fine-print">Pri INPUT_PULLUP je LOW aktívny stav: tlačidlo stlačené spája D2 s GND.</p></article>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">PROJEKTOVÉ KARTY · VYBER SI JEDNU</p><h2>Signalizácia so stabilným vstupom</h2></div><p class="section-note">Zopakuj si projekt z 1. hodiny, ale pripoj tlačidlo na GND a zmeň konfiguráciu na INPUT_PULLUP.</p></div>
+      <div class="project-grid">
+        <article class="project-card"><span class="project-number">KARTA 01 / ZÁKLAD</span><h3>Tichý signál</h3><p>LED svieti iba počas stlačenia tlačidla pripojeného medzi D2 a GND.</p><div class="task-line"><strong>Úloha</strong><span>Zmeň INPUT na INPUT_PULLUP a skontroluj podmienku.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Uvoľnené = zhasnutá, stlačené = svieti.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 02 / POROVNAJ</span><h3>Dve zapojenia</h3><p>Otestuj najprv externý pull-down a potom interný pull-up s tým istým tlačidlom.</p><div class="task-line"><strong>Úloha</strong><span>Vyplň tabuľku uvoľnené/stlačené a LOW/HIGH.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Vysvetlíš, prečo sa logika otočila.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 03 / ODSTRAŇ CHYBU</span><h3>LED svieti „naopak“</h3><p>Program predpokladá, že stlačené tlačidlo je HIGH, ale používa INPUT_PULLUP.</p><div class="task-line"><strong>Úloha</strong><span>Nájdi a oprav jednu chybnú podmienku.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>LED svieti iba pri stlačenom tlačidle.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 04 / DVA VSTUPY</span><h3>Semafor otázok</h3><p>Dve tlačidlá pripájajú dva vstupy na GND; každé riadi jednu LED.</p><div class="task-line"><strong>Úloha</strong><span>Obom tlačidlám nastav INPUT_PULLUP; podmienku LOW posudzuj samostatne.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Správne funguje každé tlačidlo aj obe naraz.</span></div></article>
+        <article class="project-card"><span class="project-number">KARTA 05 / VYSVETLI</span><h3>Prečo bez ďalšieho rezistora?</h3><p>Ukáž v kóde, ktorý príkaz zapína interný pull-up, a v zapojení, kam vedie tlačidlo.</p><div class="task-line"><strong>Úloha</strong><span>Vysvetli pokojový stav aj to, prečo stlačenie vytvorí LOW.</span></div><div class="check-line"><strong>Hotovo, keď</strong><span>Vieš vysvetliť elektrickú aj programovú časť.</span></div></article>
+        <article class="project-card teacher-card"><span class="project-number">PRE UČITEĽA / BEZPEČNÁ PRAX</span><h3>Najprv odpoj napájanie</h3><p>Pred zmenou zapojenia odpoj USB. Nikdy neskratuj +5 V a GND; LED pripájaj s prúdovým rezistorom. Arduino Uno používa 5 V logiku — 5 V nepripájaj na 3,3 V dosky, ak to výrobca nepovoľuje.</p><div class="task-line"><strong>Kontrolná otázka</strong><span>Aké napätie a akú logiku podporuje konkrétna doska?</span></div></article>
+      </div>
+    </section>
+
+    <section class="teacher-notes shell" data-teacher-only>
+      <p class="eyebrow">UČITEĽSKÉ POZNÁMKY · SKRYTÉ V POHĽADE ŽIAKA</p>
+      <h2>Metodické vedenie hodiny</h2>
+      <div class="teacher-notes-grid">
+        <article><h3>Riadený objav</h3><p>Na začiatku sa žiakov opýtajte na výsledok čítania odpojeného vstupu; nech predikciu napíšu skôr, než spoločne pomenujete pojem floating input. Porovnanie vykonajte na bezpečnej doske a nikdy zámerne neskratujte napájanie.</p></article>
+        <article><h3>Kľúčové pozorovanie</h3><p>Pull-down: vstup sa v pokoji cez rezistor pripája ku GND, preto číta LOW; stlačené tlačidlo ho pripája na +5 V, preto číta HIGH. INPUT_PULLUP: pokojový HIGH; tlačidlo na GND dáva pri stlačení LOW.</p></article>
+        <article><h3>Otázky a diferenciácia</h3><p>„Ktorá cesta určí pokojový stav? Čo sa zmenilo v zapojení? Ktorý riadok musí zodpovedať aktívnej logickej nule?“ Podpora: použiť pripravenú tabuľku HIGH/LOW. Výzva: preniesť riešenie na dva nezávislé vstupy a otestovať oba naraz.</p></article>
+      </div>
+    </section>
+
+    <section class="shell lesson-section compact-section">
+      <div class="section-heading"><div><p class="eyebrow">PRECVIČ SI PRED TESTOM</p><h2>Je vstup stabilný?</h2></div><p class="section-note">Tento krátky interaktívny tréning dá okamžitú spätnú väzbu a vypočíta známku. Na klasifikovaný test použi učiteľov Google Form; ten uloží meno, triedu a odpovede do tabuľky.</p></div>
+      <p class="quiz-grade-guide">Bodovanie klasifikovaného testu: 5 správnych = 100 % (1) · 4 = 80 % (2) · 3 = 60 % (3) · 2 = 40 % (4) · 0–1 = 0–20 % (5).</p>
+      <div class="quiz-grid">
+        <article class="quiz-card" data-quiz="one"><span class="question-number">01 / A–D</span><h3>Prečo môže digitálny pin bez pevného spojenia striedavo hlásiť rôzne hodnoty, hoci sa tlačidla nikto nedotkol?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · Program automaticky strieda HIGH a LOW</button><button type="button" data-answer="correct">B · Nepripojený vstup zachytáva elektrické rušenie</button><button type="button" data-answer="wrong">C · Pull-up rezistor nabíja batériu</button><button type="button" data-answer="wrong">D · Funkcia setup() ruší digitálny signál</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="two"><span class="question-number">02 / A–D</span><h3>Vstup s aktívnym pull-upom je pripojený k tlačidlu do GND. Čo má urobiť test if (stav == LOW)?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · Rozpoznať uvoľnené tlačidlo</button><button type="button" data-answer="wrong">B · Zapnúť interný rezistor</button><button type="button" data-answer="correct">C · Rozpoznať stlačené tlačidlo</button><button type="button" data-answer="wrong">D · Zmeniť smer pinu na OUTPUT</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="three"><span class="question-number">03 / A–D</span><h3>Čím sa líši pull-up od pull-downu vzhľadom na pokojový stav vstupu?</h3><div class="answer-list"><button type="button" data-answer="correct">A · Pull-up drží HIGH, pull-down drží LOW</button><button type="button" data-answer="wrong">B · Oba vždy držia HIGH</button><button type="button" data-answer="wrong">C · Pull-up nastavuje výstup, pull-down číta vstup</button><button type="button" data-answer="wrong">D · Oba odpoja vstup od napájania</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="four"><span class="question-number">04 / A–D</span><h3>Vstup sa bez tlačidla mení medzi HIGH a LOW. Aká úprava obvodu odstráni plávajúci stav?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · Odstrániť konfiguráciu pinMode()</button><button type="button" data-answer="wrong">B · Pripojiť LED paralelne k tlačidlu</button><button type="button" data-answer="wrong">C · Dlhšie čakať pomocou delay()</button><button type="button" data-answer="correct">D · Zaviesť pull-up alebo pull-down na definovanie pokojovej úrovne</button></div><p class="feedback" aria-live="polite"></p></article>
+        <article class="quiz-card" data-quiz="five"><span class="question-number">05 / A–D</span><h3>Aké externé zapojenie použiješ, ak má mať uvoľnené tlačidlo stabilný stav LOW a stlačené tlačidlo pripojí vstup na +5 V?</h3><div class="answer-list"><button type="button" data-answer="wrong">A · Interný pull-up a tlačidlo medzi vstupom a GND</button><button type="button" data-answer="wrong">B · Iba vodič od vstupu k +5 V, bez tlačidla</button><button type="button" data-answer="wrong">C · Nastaviť LED ako INPUT</button><button type="button" data-answer="correct">D · Pull-down rezistor medzi vstup a GND; tlačidlo medzi vstup a +5 V</button></div><p class="feedback" aria-live="polite"></p></article>
+      </div>
+      <section class="quiz-result" data-quiz-result hidden aria-live="polite"></section>
+      <p class="score-line" data-score aria-live="polite">Zatiaľ bez odpovedí · 0/5 správne</p>
+      <p class="quiz-form-note" data-teacher-only><strong>Google Forms:</strong> Na klasifikované hodnotenie použi formulár „Test 1.18“. Zaznamená meno, triedu a odpovede žiakov a automaticky vypočíta známku. <a href="google-formular.html">Otvoriť návod na nastavenie testov →</a></p>
+    </section>
+
+    <section class="lesson-sources shell">
+      <div><p class="eyebrow">PRIMÁRNE ZDROJE</p><h2>Dokumentácia Arduino</h2><p class="section-note">Oficiálna referencia konfigurácie digitálneho pinu a bezpečnostné údaje dosky.</p></div>
+      <div class="resource-links">
+        <a href="https://docs.arduino.cc/language-reference/en/functions/digital-io/pinMode/" target="_blank" rel="noopener noreferrer"><span>INPUT_PULLUP</span><strong>pinMode() ↗</strong></a>
+        <a href="https://docs.arduino.cc/language-reference/en/functions/digital-io/digitalread/" target="_blank" rel="noopener noreferrer"><span>ČÍTANIE STAVU</span><strong>digitalRead() ↗</strong></a>
+        <a href="https://store.arduino.cc/products/arduino-uno-rev3" target="_blank" rel="noopener noreferrer"><span>ÚDAJE O DOSKE</span><strong>Arduino Uno Rev3 ↗</strong></a>
+      </div>
+    </section>
+
+    <section class="shell assessment-section"><div><p class="eyebrow">KRITÉRIÁ ÚSPECHU</p><h2>Na konci hodiny žiak…</h2></div><ul class="assessment-list"><li><span>01</span> vysvetlí, prečo plávajúci vstup nemá spoľahlivý logický stav,</li><li><span>02</span> správne porovná pokojové a stlačené stavy pull-up a pull-down zapojenia,</li><li><span>03</span> použije <code>INPUT_PULLUP</code> a v programe vyhodnotí stlačenie ako <code>LOW</code>.</li></ul></section>
+    <nav class="lesson-nav shell" aria-label="Navigácia cvičení"><a href="cvicenie-1.html">← Cvičenie 01</a><a class="next-link" href="domace-ulohy.html">Prejsť na domáce úlohy →</a></nav>
+  </main>
+  <footer class="site-footer shell"><span>VÝPOČTOVÁ TECHNIKA · 3. ROČNÍK</span><span>Cvičenie 02 / 02 · 45 min</span><a href="index.html">Prehľad <span aria-hidden="true">→</span></a></footer>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="520" viewBox="0 0 720 520" role="img" aria-label="Technická ilustrácia digitálneho signálu">
+<defs><linearGradient id="board" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#235553"/><stop offset="1" stop-color="#102d3c"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#a9f16c"/><stop offset="1" stop-color="#64bad9"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="8"/></filter><pattern id="grid" width="27" height="27" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".9" fill="#a9b9cc" opacity=".24"/></pattern></defs>
+<rect width="720" height="520" fill="url(#grid)"/>
+<circle cx="362" cy="258" r="194" fill="none" stroke="#7390a3" opacity=".1"/><circle cx="362" cy="258" r="245" fill="none" stroke="#7390a3" opacity=".09"/>
+<g transform="translate(82 67) rotate(-7 260 195)">
+<rect x="112" y="61" width="415" height="328" rx="27" fill="#06141e" opacity=".6" transform="translate(10 17)"/>
+<rect x="100" y="49" width="415" height="328" rx="26" fill="url(#board)" stroke="#588a8a" stroke-width="2"/>
+<path d="M128 76H490M128 350H490" stroke="#9bbfb6" opacity=".26"/>
+<rect x="130" y="90" width="355" height="33" rx="6" fill="#0a2129"/><text x="144" y="111" font-family="monospace" font-weight="bold" fill="#a9f16c" font-size="15">DIGITAL  /  I·O</text><text x="474" y="111" text-anchor="end" font-family="monospace" fill="#9fb9cb" font-size="11">REV 02</text>
+<g fill="#0b1c25" stroke="#6b938d"><rect x="158" y="151" width="210" height="168" rx="9"/><rect x="376" y="148" width="95" height="70" rx="6"/><rect x="389" y="244" width="80" height="67" rx="6"/></g>
+<g stroke="#80c4a1" fill="none" opacity=".58" stroke-width="2"><path d="M130 185H158M368 169H376M368 197H402V148M368 280H389M471 182H487V276H470"/><path d="M177 320v29h260v-38"/><path d="M218 150V124H448V148"/></g>
+<g stroke="#9ebcc7" opacity=".43" stroke-width="2"><path d="M148 146h225M148 322h225" stroke-dasharray="4 6"/><path d="M152 172h7m-7 19h7m-7 19h7m-7 19h7m-7 19h7m-7 19h7m-7 19h7"/></g>
+<text x="263" y="217" text-anchor="middle" fill="#e0f7eb" font-size="21" font-weight="600" font-family="monospace">ATmega</text><text x="263" y="239" text-anchor="middle" fill="#95b7b7" font-size="14" font-family="monospace">328P / MCU</text><path d="M198 265H329" stroke="#638d89"/><text x="263" y="290" text-anchor="middle" fill="#a9f16c" font-size="12" font-family="monospace">INPUT → OUTPUT</text>
+<text x="423" y="179" text-anchor="middle" fill="#d4e7e8" font-family="monospace" font-size="14">D2</text><text x="423" y="201" text-anchor="middle" fill="#a9f16c" font-family="monospace" font-size="11">INPUT</text>
+<text x="429" y="273" text-anchor="middle" fill="#d4e7e8" font-family="monospace" font-size="14">D8</text><text x="429" y="293" text-anchor="middle" fill="#9ad8ed" font-family="monospace" font-size="11">OUTPUT</text>
+<circle cx="145" cy="363" r="6" fill="#a9f16c"/><circle cx="166" cy="363" r="5" fill="#468c83"/>
+<g fill="#a7c7bf" font-family="monospace" font-size="10"><text x="184" y="365">5V</text><text x="460" y="366">GND</text></g>
+</g>
+<g font-family="monospace" font-weight="500" font-size="14"><rect x="64" y="70" width="135" height="43" rx="8" fill="#0b2531" stroke="#62bcb4" opacity=".98"/><text x="84" y="97" fill="#a9f16c">IN: HIGH / 1</text><rect x="513" y="352" width="151" height="43" rx="8" fill="#0b2531" stroke="#62bcb4"/><text x="534" y="380" fill="#a9f16c">OUT: LED ON</text></g>
+<path d="M131 113V160H189M527 350v-27h-41" fill="none" stroke="#a9f16c" stroke-dasharray="5 7" opacity=".65"/>
+<circle cx="524" cy="352" r="15" fill="#a9f16c" opacity=".18" filter="url(#glow)"/>
+<path d="M70 446 H170 V423H254 V446H337 V423H421 V446H496 V423H650" fill="none" stroke="url(#edge)" stroke-width="4" stroke-linejoin="round"/><text x="70" y="405" fill="#859cab" font-family="monospace" font-size="12">DIGITAL SIGNAL · T / ms</text>
+</svg>

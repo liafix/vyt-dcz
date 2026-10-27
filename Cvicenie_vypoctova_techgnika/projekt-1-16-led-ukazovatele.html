@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b1425">
+  <meta name="description" content="Desať hodnotených praktických úloh v C/C++: ovládanie štyroch LED diód ukazovateľmi a poľami pinov na ESP32 DevKit alebo vo Wokwi.">
+  <title>Projekt 1.16 — LED a ukazovatele | Výpočtová technika</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="vyt-2.css">
+  <script src="app.js" defer></script>
+  <script src="vyt-2.js" defer></script>
+</head>
+<body data-project="1-16-led-pointers">
+  <header class="site-header">
+    <a class="wordmark" href="index.html"><span class="wordmark-icon">D·I/O</span><span>VÝPOČTOVÁ TECHNIKA <span class="wordmark-muted">/ 3. ROČNÍK</span></span></a>
+    <a class="header-link" href="lekcia.html?tema=1-16">← Téma 1.16</a>
+  </header>
+  <main>
+    <section class="lesson-hero shell project-hero">
+      <div>
+        <p class="eyebrow"><span class="live-dot"></span> SAMOSTATNÝ PROJEKT · 10 ÚLOH · MAX. 20 BODOV</p>
+        <h1>LED diódy<br><span>a ukazovatele.</span></h1>
+        <p class="hero-lead">Použi polia pinov, ukazovatele a dereferencovanie na ovládanie svetelného efektu na ESP32 DevKit.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#zadania">Prejsť na zadania <span aria-hidden="true">↓</span></a>
+          <button class="button button-quiet" type="button" data-print>Vytlačiť projekt</button>
+        </div>
+        <div class="hero-meta"><span>PREDMET · VÝPOČTOVÁ TECHNIKA</span><span>ROČNÍK · 3.</span><span>C / C++</span><span>ESP32 · WOKWI</span></div>
+      </div>
+      <aside class="outcome-card outcome-card-purple">
+        <span class="outcome-icon">10×2</span>
+        <p class="eyebrow">CIEĽ PROJEKTU</p>
+        <h2>Programuj, testuj, vysvetli.</h2>
+        <p>Bezpečne prejdi pole GPIO pinov pomocou ukazovateľa, ovládaj LED a vysvetli rozdiel medzi adresou, ukazovateľom a dereferencovanou hodnotou.</p>
+        <div class="success-line"><span class="live-dot"></span> 10 ÚLOH × 2 BODY = MAX. 20 BODOV</div>
+      </aside>
+    </section>
+
+    <section class="shell project-meta-grid">
+      <article class="panel"><span class="phase">VÝVOJOVÉ PROSTREDIE</span><h2>Vyber si prostredie</h2><p>Visual Studio Code + PlatformIO alebo Arduino IDE. Zapojenie možno najskôr overiť vo Wokwi, prípadne na fyzickom ESP32 DevKit.</p><div class="project-resource-links"><a href="https://wokwi.com/" target="_blank" rel="noopener noreferrer">Otvoriť simulátor Wokwi ↗</a><a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener noreferrer">Arduino Language Reference ↗</a></div></article>
+      <article class="panel"><span class="phase">VYBAVENIE</span><h2>4 × LED · 4 × rezistor</h2><p>Štyri LED diódy, štyri samostatné rezistory 220–330 Ω, štyri prepojovacie vodiče a spoločná zem GND.</p><p class="fine-print">Každá LED musí mať svoj vlastný sériový rezistor.</p></article>
+    </section>
+
+    <section class="shell lesson-section" id="zapojenie">
+      <div class="section-heading"><div><p class="eyebrow">ZAPOJENIE A POMÔCKY</p><h2>Najprv zapoj. Potom zapni.</h2></div><p class="section-note">Pinout sa môže líšiť podľa konkrétnej dosky ESP32. Pred fyzickým zapojením si over označenia GPIO svojho modelu.</p></div>
+      <div class="panel project-wiring-panel">
+        <div class="project-pin-table">
+          <div class="project-pin-row project-pin-heading"><span>Súčiastka</span><span>Pripojenie k ESP32</span><span>Prúdová cesta</span></div>
+          <div class="project-pin-row"><span>LED 1</span><span>GPIO 16</span><span>GPIO 16 → rezistor → anóda; katóda → GND</span></div>
+          <div class="project-pin-row"><span>LED 2</span><span>GPIO 17</span><span>GPIO 17 → rezistor → anóda; katóda → GND</span></div>
+          <div class="project-pin-row"><span>LED 3</span><span>GPIO 18</span><span>GPIO 18 → rezistor → anóda; katóda → GND</span></div>
+          <div class="project-pin-row"><span>LED 4</span><span>GPIO 19</span><span>GPIO 19 → rezistor → anóda; katóda → GND</span></div>
+          <div class="project-pin-row"><span>Zem</span><span>GND dosky</span><span>Všetky štyri katódy spoj na GND.</span></div>
+        </div>
+        <div class="project-safety"><strong>Bezpečnosť:</strong> ESP32 GPIO používa 3,3 V logiku a vstupy GPIO spravidla nie sú 5 V tolerantné. Na GPIO nepripájaj 5 V. Pred každou zmenou fyzického zapojenia odpoj USB a riaď sa dokumentáciou konkrétnej dosky. Simuláciu vo Wokwi zostav s tým istým zapojením.</div>
+        <figure class="project-reference-figure">
+          <img src="https://raw.githubusercontent.com/wokwi/wokwi-boards/main/boards/esp32-devkit-v1/board.svg" alt="Vektorové vyobrazenie dosky ESP32 DevKit V1 použitej ako ilustrácia k projektu.">
+          <figcaption>Ilustračné vyobrazenie dosky ESP32 DevKit V1, zdroj: <a href="https://github.com/wokwi/wokwi-boards/tree/main/boards/esp32-devkit-v1" target="_blank" rel="noopener noreferrer">Wokwi boards ↗</a>. Nie je to univerzálny pinout: označenia sa môžu líšiť podľa výrobcu a revízie dosky. <a href="https://docs.wokwi.com/parts/wokwi-esp32-devkit-v1" target="_blank" rel="noopener noreferrer">Pozri dokumentáciu modelu vo Wokwi ↗</a>.</figcaption>
+        </figure>
+        <figure class="project-reference-figure">
+          <img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/ESP32-DOIT-DEVKIT-V1-Board-Pinout-36-GPIOs-updated.jpg" alt="Pinout ESP32 DOIT DevKit V1 vo variante s 36 pinmi; pred zapojením over označenia pinov na konkrétnej doske.">
+          <figcaption>Pinout ESP32 DOIT DevKit V1 vo variante s 36 pinmi. Zdroj: <a href="https://randomnerdtutorials.com/esp32-pinout-reference-gpios/" target="_blank" rel="noopener noreferrer">Random Nerd Tutorials ↗</a>. Počet a poloha vývodov sa líšia podľa výrobcu a revízie; over označenia GPIO16–GPIO19 na svojej doske pred zapojením.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">ZÁKLAD PROGRAMU</p><h2>Bezpečná východisková kostra</h2></div><p class="section-note">Použi tento kód ako východisko pre desať úloh. Počítadlo prvkov sa správne určuje veľkosťou jedného prvku poľa; ukazovateľ zostáva v platných hraniciach.</p></div>
+      <article class="panel code-panel project-code-panel">
+        <div class="code-heading"><span>ARDUINO IDE / PLATFORMIO · ESP32 DEVKIT</span><button class="copy-button" type="button" data-copy="pointer-starter">Kopírovať</button></div>
+        <pre><code id="pointer-starter">const int ledPins[] = {16, 17, 18, 19};
+const size_t pocetLED = sizeof(ledPins) / sizeof(ledPins[0]);
+
+void setup() {
+  Serial.begin(115200);
+
+  const int* p = ledPins;
+
+  for (size_t i = 0; i &lt; pocetLED; i++) {
+    const int pin = *(p + i);
+    pinMode(pin, OUTPUT);
+    digitalWrite(pin, LOW);
+  }
+}
+
+void loop() {
+  const int* p = ledPins;
+
+  for (size_t i = 0; i &lt; pocetLED; i++) {
+    const int pin = *(p + i);
+    digitalWrite(pin, HIGH);
+    delay(300);
+    digitalWrite(pin, LOW);
+  }
+}</code></pre>
+        <div class="pointer-glossary">
+          <article><code>ledPins</code><span>Pole čísel GPIO, ktoré ovládajú LED diódy.</span></article>
+          <article><code>p</code><span>Ukazovateľ na prvý prvok poľa, teda na jeho začiatok.</span></article>
+          <article><code>*p</code><span>Hodnota na adrese, na ktorú ukazuje p; tu číslo prvého pinu.</span></article>
+          <article><code>*(p + i)</code><span>Číslo GPIO pinu na pozícii i. Posun rešpektuje veľkosť typu int.</span></article>
+          <article><code>pocetLED</code><span>Počet prvkov vypočítaný ako veľkosť celého poľa delená veľkosťou jedného prvku.</span></article>
+          <article><code>digitalWrite()</code><span>Nastaví vybraný výstup na HIGH alebo LOW.</span></article>
+        </div>
+        <p class="project-code-note">Upozornenie: <code>sizeof(ledPins)</code> vracia veľkosť celého poľa v bajtoch, ale <code>sizeof(ledPins[0])</code> veľkosť jedného prvku. Delením druhou hodnotou dostaneme skutočný počet LED. Ak by si použil <code>sizeof(ledPins) / sizeof(ledPins)</code>, výsledkom by bolo nesprávne číslo 1. Pole a ukazovateľ neprekračuj.</p>
+      </article>
+    </section>
+
+    <section class="shell lesson-section project-tasks-section" id="zadania">
+      <div class="section-heading"><div><p class="eyebrow">10 ÚLOH · KAŽDÁ MAX. 2 BODY</p><h2>Pracuj postupne.</h2></div><p class="section-note">Úlohy si priebežne označ. Dokončený stav sa uloží v tomto prehliadači; učiteľovi odošli program a doklady podľa pokynov.</p></div>
+      <div class="project-progress" role="status"><span>POSTUP PROJEKTOM</span><strong data-project-progress>0 / 10 dokončených</strong><div class="project-progress-track" role="progressbar" aria-label="Dokončené úlohy" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span data-project-progress-bar></span></div><button class="progress-reset" type="button" data-project-reset>Vynulovať môj postup</button></div>
+
+      <div class="project-task-list">
+        <article class="project-task-card" data-project-task-card="1">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="1"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 01 · 2 BODY</span><h3>Postupné rozsvecovanie LED pomocou ukazovateľa</h3><p>Rozsvecuj a zhasínaj všetky štyri LED po poradí. Čísla GPIO nesmieš vkladať priamo do volaní <code>digitalWrite()</code>.</p>
+          <ul><li>Vytvor pole <code>ledPins[]</code> a nastav ukazovateľ na jeho prvý prvok.</li><li>Cyklom <code>for</code> prejdi štyri platné pozície poľa.</li><li>Každú vybranú LED nechaj svietiť 300 ms a potom ju zhasni.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> LED sa rozsvecujú postupne a GPIO vyberá ukazovateľ z poľa.</p>
+          <p class="project-hint"><strong>Kontrola hranice:</strong> platné indexy sú od 0 po <code>pocetLED - 1</code>.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="2">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="2"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 02 · 2 BODY</span><h3>Ovládanie tretej LED dereferencovaním</h3><p>Rozsvieť iba tretiu LED. Číslo jej GPIO získaš z tretieho prvku poľa cez ukazovateľ, nie zadaním pinu priamo.</p>
+          <ul><li>Prejdi na prvý prvok ukazovateľom a vypočítaj platný posun tretej LED.</li><li>Ulož dereferencovanú hodnotu do premennej s číslom pinu.</li><li>Rozsvieť a následne zhasni zvolenú LED; ostatné nechaj zhasnuté.</li><li>Vysvetli rozdiel medzi hodnotou <code>p</code> (adresou) a <code>*p</code> (hodnotou na tejto adrese).</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> vyberieš tretiu LED cez ukazovateľ a vysvetlíš adresu aj dereferencovanie.</p>
+          <p class="project-hint"><strong>Pomôcka:</strong> „tretí prvok“ má index 2, pretože indexovanie poľa sa začína nulou.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="3">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="3"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 03 · 2 BODY</span><h3>Opačné poradie LED</h3><p>Uprav sekvenciu tak, aby sa LED rozsvecovali LED 4 → LED 3 → LED 2 → LED 1.</p>
+          <ul><li>Nastav ukazovateľ na začiatok poľa pinov.</li><li>Prejdi pole odzadu pomocou indexu v bezpečnom klesajúcom cykle.</li><li>Pri každom kroku dereferencuj adresu vybraného platného prvku.</li><li>Pošli pohyb späť na začiatok bez použitia záporného indexu.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> svetlo postupuje v opačnom poradí bez prístupu mimo pole.</p>
+          <p class="project-hint"><strong>Bezpečný vzor:</strong> pri indexe typu <code>size_t</code> testuj <code>i &gt; 0</code> a sprístupni prvok <code>i - 1</code>; unsigned index nenechaj klesnúť pod nulu.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="4">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="4"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 04 · 2 BODY</span><h3>Svetelný bežec</h3><p>Vždy svieti jedna LED. Svetlo plynulo putuje z LED 1 na LED 4; po dosiahnutí poslednej LED sa vráti na prvú.</p>
+          <ul><li>Použi pole GPIO pinov a ukazovateľ.</li><li>Pred zapnutím nasledujúcej LED zhasni predchádzajúcu.</li><li>Nastav dobu svietenia 150 ms.</li><li>Ukazovateľom a správnym rozsahom indexu udrž smer LED 1 → LED 4.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> vznikne opakujúci sa svetelný bežec, pri ktorom naraz nesvieti viac než jedna LED.</p>
+          <p class="project-hint"><strong>Pomôcka:</strong> na začiatku každého priechodu zhasni všetky LED, potom rozsvieť iba aktuálny pin.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="5">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="5"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 05 · 2 BODY</span><h3>Synchronizované blikanie</h3><p>Všetky štyri LED zapni súčasne, ponechaj ich zapnuté 500 ms, všetky vypni a 500 ms počkaj.</p>
+          <ul><li>Prvý cyklus cez pole zapne všetky LED.</li><li>Počkaj 500 ms až po zapnutí každej LED v skupine.</li><li>Druhý cyklus cez pole vypne všetky LED.</li><li>Po vypnutí všetkých LED počkaj ďalších 500 ms.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> všetky LED blikajú súčasne; piny sa v oboch cykloch vyberajú z poľa.</p>
+          <p class="project-hint"><strong>Pomôcka:</strong> neumiestňuj <code>delay(500)</code> do vnútra cyklu, ktorý postupne nastavuje piny.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="6">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="6"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 06 · 2 BODY</span><h3>Samostatné pole stavov</h3><p>Ulož stav každej LED do vlastného poľa. Hodnota 0 znamená zhasnutú LED, hodnota 1 svietiacu.</p>
+          <ul><li>Vytvor a vynuluj pole <code>int stavy[] = {0, 0, 0, 0};</code>.</li><li>Nastav ukazovateľ na prvý prvok poľa stavov.</li><li>Pomocou dereferencovania zmeň druhý a štvrtý stav na 1.</li><li>Prejdi oba polia rovnakým platným indexom a nastav výstupy podľa uložených stavov.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> svietia len LED 2 a LED 4; stav každej LED uchováva pole.</p>
+          <p class="project-hint"><strong>Pomôcka:</strong> hodnota stavov sa zapisuje cez <code>*(stavPtr + i)</code>, kým pin sa získava z poľa pinov na tej istej pozícii.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="7">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="7"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 07 · 2 BODY</span><h3>Prepínanie stavu dereferencovaním</h3><p>Vytvor ukazovateľ na premennú, ktorá uchováva stav LED. Pomocou ukazovateľa prepínaj LED zo zhasnutého stavu do rozsvieteného a späť.</p>
+          <ul><li>Uchovaj stav jednej LED v premennej typu <code>bool</code>.</li><li>Inicializuj ukazovateľ na adresu premennej pomocou <code>&amp;</code>.</li><li>Zmeň stav cez <code>*stavPtr = !(*stavPtr);</code>.</li><li>Podľa aktuálneho stavu nastav LED cez <code>digitalWrite()</code>.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> LED striedavo bliká a žiak vysvetlí, prečo sa zmenila samotná premenná.</p>
+          <p class="project-hint"><strong>Bezpečný postup:</strong> najprv inicializuj bool, až potom nastav ukazovateľ na jeho adresu.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="8">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="8"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 08 · 2 BODY</span><h3>Striedanie dvoch skupín</h3><p>Striedaj dve svetelné skupiny: najprv LED 1 a 3, potom LED 2 a 4. Každá skupina zostane aktívna 500 ms.</p>
+          <ul><li>Navrhni dva režimy s odlišným vzorom svietiacich a zhasnutých LED.</li><li>Pri zmene režimu nastav všetky štyri výstupy vrátane LED, ktoré majú zhasnúť.</li><li>Piny vyberaj z poľa cez ukazovateľ; na rozhodnutie o skupine môžeš použiť pole stavov.</li><li>Po zadanom oneskorení prepnúť na druhý režim a efekt zopakuj.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> obe skupiny sa pravidelne a zreteľne striedajú bez nechceného ponechaného výstupu.</p>
+          <p class="project-hint"><strong>Pomôcka:</strong> každý režim úplne prepíš na všetkých pinoch; neprepínaj len LED, ktorá má v novom režime svietiť.</p>
+        </article>
+
+        <article class="project-task-card" data-project-task-card="9">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="9"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 09 · 2 BODY</span><h3>Svetelný bežec tam a späť</h3><p>Rozšír svetelný bežec z úlohy 4. Na konci poľa zmeň smer, vráť svetlo k prvej LED a smer opäť obráť.</p>
+          <ul><li>Uchovaj index a premennú určujúcu smer pohybu.</li><li>Po rozsvietení aktuálnej LED ju po 150 ms zhasni a až potom vypočítaj ďalšiu pozíciu.</li><li>Zmeň smer pri prvej alebo poslednej LED tak, aby aktuálny index zostal platný.</li><li>Na výber GPIO pinu používaj dereferencovaný prvok poľa.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> LED plynulo prechádza LED 1 → LED 4 → LED 1 a nikdy neopustí hranice poľa.</p>
+          <p class="project-hint"><strong>Kontrola:</strong> nikdy nepočítaj so záporným indexom pre unsigned typ a nikdy nečítaj index rovný <code>pocetLED</code>.</p>
+        </article>
+
+        <article class="project-task-card project-final-task" data-project-task-card="10">
+          <label class="project-task-completion"><input type="checkbox" data-project-task="10"><span>Hotovo</span></label>
+          <span class="project-number">ÚLOHA 10 · ZÁVEREČNÁ ÚLOHA · 2 BODY</span><h3>Navrhni vlastný svetelný efekt</h3><p>Zostav vlastný efekt, ktorý využije všetky štyri LED a najmenej jeden správne inicializovaný ukazovateľ.</p>
+          <ul><li>Vyber efekt: postupné rozsvecovanie, dvojitý záblesk, skupiny alebo vlastná kombinácia.</li><li>Použi pole GPIO pinov, jeden alebo viac cyklov a aspoň jednu podmienku alebo premennú.</li><li>Správne nastav výstupy, rýchlosť a opakovanie efektu.</li><li>Stráž hranice poľa a dereferencuj len platné, inicializované ukazovatele.</li><li>Stručne vysvetli adresu, ukazovateľ a hodnotu získanú cez dereferencovanie.</li></ul>
+          <p class="project-done"><strong>Úspech:</strong> všetky štyri LED vytvoria funkčný, opakovateľný efekt a autor vysvetlí svoje programové riešenie.</p>
+          <p class="project-hint"><strong>Odporúčanie:</strong> najprv na papieri nakresli časový diagram alebo jednotlivé kroky svetelného vzoru.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="shell lesson-section project-submission">
+      <div class="section-heading"><div><p class="eyebrow">ČO ODOVZDAŤ</p><h2>Ukaž celý postup.</h2></div><p class="section-note">Výsledok zdokumentuj tak, aby sa dal znovu spustiť a vyhodnotiť.</p></div>
+      <article class="panel"><ol class="activity-steps"><li><span>01</span>Zdrojový kód ku všetkým desiatim úlohám, každý s číslom a stručným vysvetľujúcim komentárom.</li><li><span>02</span>Snímky funkčného zapojenia vo Wokwi alebo fotografie fyzickej dosky pre jednotlivé efekty.</li><li><span>03</span>Výsledok a testovací scenár pre každú úlohu; pri úlohe 9 otestuj oba krajné body pohybu.</li><li><span>04</span>Vysvetlenie rozdielu medzi adresou premennej, ukazovateľom na adresu a hodnotou získanou dereferencovaním.</li><li><span>05</span>Funkčný program záverečnej úlohy 10 a jej krátky predvádzací opis.</li></ol></article>
+    </section>
+
+    <section class="shell lesson-section">
+      <div class="section-heading"><div><p class="eyebrow">HODNOTENIE · SPOLU 20 BODOV</p><h2>Priehľadné kritériá</h2></div><p class="section-note">Každá z desiatich úloh sa posudzuje samostatne. Odpoveď ústne zdôvodni a ukáž jej funkčné otestovanie.</p></div>
+      <div class="compare-grid">
+        <article class="panel"><span class="phase">BODY ZA ÚLOHU</span><div class="marking-table"><span>2 body</span><strong>Funkčné riešenie, správny ukazovateľ a vysvetlenie.</strong><span>1 bod</span><strong>Čiastočne funkčné riešenie alebo menší nedostatok.</strong><span>0 bodov</span><strong>Chýbajúce alebo nefunkčné riešenie.</strong><span>Maximum</span><strong>20 bodov (10 úloh × 2 body).</strong></div></article>
+        <article class="panel"><span class="phase">PREVOD POČTU BODOV NA ZNÁMKU</span><div class="marking-table"><span>18–20 bodov</span><strong>1 · výborný</strong><span>15–17 bodov</span><strong>2 · chválitebný</strong><span>11–14 bodov</span><strong>3 · dobrý</strong><span>7–10 bodov</span><strong>4 · dostatočný</strong><span>0–6 bodov</span><strong>5 · nedostatočný</strong></div></article>
+      </div>
+    </section>
+
+    <section class="teacher-notes shell" data-teacher-only>
+      <p class="eyebrow">POZNÁMKY PRE UČITEĽA · SKRYTÉ V POHĽADE ŽIAKA</p>
+      <h2>Odporúčaný priebeh a metodické usmernenie</h2>
+      <div class="teacher-notes-grid">
+        <article><h3>Časový plán</h3><p>Úvod a zapojenie: 10 min. Vysvetlenie ukazovateľa a správneho počítania prvkov poľa: 10 min. Úlohy 1–5: približne 20 min. Úlohy 6–9 a vlastná výzva: diferenciácia alebo samostatná práca. Pri jednom vyučovacom bloku možno projekt rozdeliť na dve stretnutia.</p></article>
+        <article><h3>Technická kontrola pred odovzdaním</h3><p>Základ programu používa sizeof(ledPins) / sizeof(ledPins[0]); zápis sizeof(ledPins) / sizeof(ledPins) je chybný, pretože počet pinov v poli zistí ako 1. Pre reverzný prechod na unsigned indexe je bezpečný test i &gt; 0 a potom prístup i - 1.</p></article>
+        <article><h3>Bezpečnosť a hodnotenie</h3><p>ESP32 pracuje s 3,3 V logikou; na GPIO nepripájajte 5 V. Pred fyzickým prepojovaním odpojiť USB. Každá LED musí mať vlastný rezistor. Každú úlohu hodnotiť v rozsahu 0–2 body podľa funkčnosti, správneho použitia ukazovateľa a schopnosti žiaka vysvetliť riešenie.</p></article>
+      </div>
+    </section>
+
+    <section class="shell lesson-section">
+      <div><p class="eyebrow">ODPORÚČANÉ ZDROJE</p><h2>Pokračuj v dokumentácii</h2></div>
+      <div class="resource-links project-source-grid">
+        <a href="https://en.cppreference.com/w/cpp/language/pointer" target="_blank" rel="noopener noreferrer"><span>C / C++ · UKAZOVATELE</span><strong>C++ pointers ↗</strong></a>
+        <a href="https://en.cppreference.com/w/cpp/language/array" target="_blank" rel="noopener noreferrer"><span>C / C++ · POLIA</span><strong>C++ arrays ↗</strong></a>
+        <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener noreferrer"><span>ARDUINO · REFERENCIA</span><strong>Arduino Language Reference ↗</strong></a>
+        <a href="https://wokwi.com/" target="_blank" rel="noopener noreferrer"><span>SIMULÁCIA · ESP32</span><strong>Wokwi ESP32 Simulator ↗</strong></a>
+      </div>
+    </section>
+
+    <nav class="lesson-nav shell" aria-label="Navigácia témy"><a href="lekcia.html?tema=1-16">← Vrátiť sa k teórii 1.16</a><a class="next-link" href="index.html#osnova">Späť na osnovu kurzu ↑</a></nav>
+  </main>
+  <footer class="site-footer shell"><span>VÝPOČTOVÁ TECHNIKA · 3. ROČNÍK</span><span>Projekt témy 1.16 · ESP32 · C/C++ ukazovatele</span><a href="#zadania">Všetkých 10 úloh ↑</a></footer>
+</body>
+</html>
